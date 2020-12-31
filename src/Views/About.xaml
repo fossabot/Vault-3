@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="Seemon.Vault.Views.About"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Seemon.Vault.Helpers"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <local:CaseConverter Case="Upper" x:Key="CaseConverter" />
+    </UserControl.Resources>
+    <DockPanel LastChildFill="True">
+        <Label DockPanel.Dock="Bottom" HorizontalAlignment="Center" FontSize="9">Click anywhere outside to close.</Label>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+            <Label Content="{Binding Title, Converter={StaticResource CaseConverter}}" FontFamily="Segoe UI" FontSize="46" FontWeight="Light" HorizontalAlignment="Center" />
+            <Image Source="{StaticResource VaultDrawingImage}" Width="128" />
+            <Label Content="{Binding Version}" HorizontalContentAlignment="Center" FontFamily="Segoe UI" FontSize="14" FontWeight="SemiBold" Margin="0 10 0 0" />
+            <Label HorizontalContentAlignment="Center" FontFamily="Segoe UI" FontSize="20" FontWeight="Regular" Margin="0 10 0 0">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding Author}" HorizontalAlignment="Center" />
+                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="5" />
+                </StackPanel>
+            </Label>
+
+            <Grid Margin="0 0 0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" FontFamily="Segoe UI" FontSize="14" FontWeight="Light" HorizontalAlignment="Left" >
+                    <Hyperlink Command="{Binding NavigateCommand}" CommandParameter="https://github.com/mattseemon/Vault">Source Code</Hyperlink>
+                </TextBlock>
+                <TextBlock Grid.Column="1" FontFamily="Segoe UI" FontSize="14" FontWeight="Light" HorizontalAlignment="Center" >
+                    <Hyperlink Command="{Binding NavigateCommand}" CommandParameter="https://github.com/mattseemon/Vault/blob/main/LICENSE">License</Hyperlink>
+                </TextBlock>
+                <TextBlock Grid.Column="2" FontFamily="Segoe UI" FontSize="14" FontWeight="Light" HorizontalAlignment="Right" >
+                    <Hyperlink Command="{Binding NavigateCommand}" CommandParameter="https://github.com/mattseemon/Vault/blob/main/README.md">Credits</Hyperlink>
+                </TextBlock>
+            </Grid>
+            <Label Content="{Binding Copyright}" FontFamily="Segoe UI" FontSize="14" FontWeight="Light" Margin="0 5" HorizontalContentAlignment="Center" />
+        </StackPanel>
+    </DockPanel>
+</UserControl>

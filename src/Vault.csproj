@@ -4,12 +4,18 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>Vault.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\Vault.ico</ApplicationIcon>
     <RootNamespace>Seemon.Vault</RootNamespace>
     <Authors>Matt Seemon</Authors>
     <Company>Matt Seemon</Company>
-    <Description>A GnuPG Powered, file system based secerts repository.</Description>
+    <Description>A GnuPG powered, file system based secrets repository.</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+    <Copyright>© Copyright 2020, Matt Seemon. All rights reserved.</Copyright>
+    <RepositoryUrl>https://github.com/mattseemon/Vault</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,7 +35,30 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Vault.ico" />
+    <Resource Include="Assets\Vault.ico" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="AssemblyInfo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="AssemblyInfo.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AssemblyInfo.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="&quot;$(DevEnvDir)TextTransform.exe&quot; -a !!BuildConfiguration!$(Configuration) &quot;$(ProjectDir)\AssemblyInfo.tt&quot;" />
+  </Target>
 
 </Project>
