@@ -11,7 +11,7 @@ namespace Seemon.Vault.Views
         public Main()
         {
             InitializeComponent();
-            this.DataContext = new MainViewModel();
+            this.DataContext = new MainViewModel(this);
         }
     }
 }
