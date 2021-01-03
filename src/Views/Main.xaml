@@ -11,12 +11,13 @@
         Title="Vault" Height="600" Width="800" MinHeight="600" MinWidth="800" WindowStartupLocation="CenterScreen">
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
+            <Button ToolTip="Settings" Content="{ip:Material Kind=CogOutline}" Command="{Binding Path=ShowSettingsCommand}" CommandParameter="{Binding ElementName=ThisWindow}" />
             <Button ToolTip="About" Content="{ip:Material Kind=InformationOutline}" Command="{Binding Path=ShowAboutCommand}"/>
         </mah:WindowCommands>
     </mah:MetroWindow.RightWindowCommands>
     <mah:MetroWindow.Flyouts>
         <mah:FlyoutsControl>
-            <mah:Flyout IsOpen="{Binding ShowAbout}" Position="Right" Width="400" Header="" Theme="Accent" IsPinned="False" CloseButtonVisibility="Hidden">
+            <mah:Flyout IsOpen="{Binding ShowAbout}" Position="Right" Width="400" Header="" Theme="Accent" IsPinned="False" CloseButtonVisibility="Hidden" CloseButtonIsCancel="True">
                 <local:About />
             </mah:Flyout>
         </mah:FlyoutsControl>

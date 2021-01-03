@@ -1,18 +1,19 @@
 ﻿using Seemon.Vault.Helpers;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Seemon.Vault.ViewModels
 {
-    public class MainViewModel : BindableBase
+    public class MainViewModel : ViewModelBase
     {
         private bool _showAbout = false;
         public bool ShowAbout
         {
             get { return _showAbout; }
-            set 
+            set
             {
                 SetProperty(ref _showAbout, value);
-                ((RelayCommand)this.ShowAboutCommand).RaiseCanExecuteChanged();
+                ((RelayCommand)ShowAboutCommand).RaiseCanExecuteChanged();
             }
         }
 
@@ -27,9 +28,30 @@ namespace Seemon.Vault.ViewModels
             }
         }
 
+        private RelayCommand _showSettingsCommand;
+        public ICommand ShowSettingsCommand
+        {
+            get
+            {
+                if (_showSettingsCommand == null)
+                    _showSettingsCommand = new RelayCommand(OnShowSettings);
+                return _showSettingsCommand;
+            }
+        }
+
+        public MainViewModel(Window owner)
+            : base(owner) { }
+
         public void OnShowAbout(object parameter)
         {
-            this.ShowAbout = !this.ShowAbout;  
+            ShowAbout = true;
+        }
+
+        public void OnShowSettings(object parameter)
+        {
+            Views.Settings settingsWindow = new Views.Settings();
+            settingsWindow.Owner = Owner;
+            settingsWindow.ShowDialog();
         }
     }
 }
