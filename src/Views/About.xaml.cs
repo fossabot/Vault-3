@@ -1,4 +1,5 @@
 ﻿using Seemon.Vault.ViewModels;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Seemon.Vault.Views
@@ -10,8 +11,9 @@ namespace Seemon.Vault.Views
     {
         public About()
         {
-            InitializeComponent();
-            this.DataContext = new AboutViewModel();
+            InitializeComponent();   
         }
+
+        private void OnControlLoaded(object sender, RoutedEventArgs e) => DataContext = new AboutViewModel(Window.GetWindow(this));
     }
 }

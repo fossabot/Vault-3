@@ -12,6 +12,12 @@
     <Compile Update="Views\About.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\License.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Profile.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Settings.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -23,7 +29,13 @@
     <Page Update="Views\About.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\License.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Main.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Profile.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Settings.xaml">

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -13,29 +14,22 @@ namespace Seemon.Vault.Helpers
             Case = CharacterCasing.Upper;
         }
 
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var str = value as string;
             if (str != null)
             {
-                switch (Case)
+                return Case switch
                 {
-                    case CharacterCasing.Lower:
-                        return str.ToLower();
-                    case CharacterCasing.Normal:
-                        return str;
-                    case CharacterCasing.Upper:
-                        return str.ToUpper();
-                    default:
-                        return str;
-                }
+                    CharacterCasing.Lower => str.ToLower(),
+                    CharacterCasing.Normal => str,
+                    CharacterCasing.Upper => str.ToUpper(),
+                    _ => str,
+                };
             }
             return string.Empty;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
     }
 }

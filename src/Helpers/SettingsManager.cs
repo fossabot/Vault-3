@@ -12,6 +12,18 @@ namespace Seemon.Vault.Helpers
 
         private string _path = string.Empty;
         private Settings _settings;
+
+        private SettingsManager()
+        {
+            _path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "settings.json");
+            if (!File.Exists(_path))
+            {
+                _settings = new Settings();
+                SaveSettings(_settings);
+            }
+            LoadSettings();
+        }
+
         public Settings Settings
         {
             get { return _settings; }
@@ -30,28 +42,18 @@ namespace Seemon.Vault.Helpers
             }
         }
 
-        private SettingsManager()
-        {
-            _path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "settings.json");
-            if (!File.Exists(_path))
-            {
-                _settings = new Settings();
-                SaveSettings(_settings);
-            }
-            LoadSettings();
-        }
-
         public void LoadSettings()
         {
             var settingsJson = File.ReadAllText(_path);
             _settings = JsonConvert.DeserializeObject<Settings>(settingsJson);
         }
 
-        public void SaveSettings(Settings settings)
+        public void SaveSettings(Settings settings, bool reload = true)
         {
             var settingsJson = JsonConvert.SerializeObject(settings, Formatting.Indented);
             File.WriteAllText(_path, settingsJson);
-            LoadSettings();
+            if (reload)
+                LoadSettings();
         }
     }
 }

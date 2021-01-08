@@ -1,5 +1,4 @@
 ﻿using MahApps.Metro.Controls;
-using Seemon.Vault.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +16,19 @@ using System.Windows.Shapes;
 namespace Seemon.Vault.Views
 {
     /// <summary>
-    /// Interaction logic for Settings.xaml
+    /// Interaction logic for License.xaml
     /// </summary>
-    public partial class Settings : MetroWindow
+    public partial class License : MetroWindow
     {
-        public Settings()
+        public License()
         {
             InitializeComponent();
-            DataContext = new SettingsViewModel(this);
+        }
+
+        private void WindowOnKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close();
         }
     }
 }

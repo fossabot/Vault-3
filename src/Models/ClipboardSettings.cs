@@ -18,6 +18,9 @@ namespace Seemon.Vault.Models
         }
 
         private CopyActions _copy = CopyActions.OnDemand;
+        private bool _autoClear = false;
+        private int _autoClearDuration = 10;
+
         [JsonProperty("copy")]
         [JsonConverter(typeof(StringEnumConverter))]
         public CopyActions Copy
@@ -26,7 +29,6 @@ namespace Seemon.Vault.Models
             set { SetProperty(ref _copy, value); }
         }
 
-        private bool _autoClear = false;
         [JsonProperty("autoClear")]
         public bool AutoClear
         {
@@ -34,7 +36,6 @@ namespace Seemon.Vault.Models
             set { SetProperty(ref _autoClear, value); }
         }
 
-        private int _autoClearDuration = 10;
         [JsonProperty("autoClearDuration")]
         public int AutoClearDuration
         {

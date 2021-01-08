@@ -5,117 +5,166 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:util="clr-namespace:Seemon.Vault.Helpers"
+        xmlns:ip="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="Settings" SizeToContent="Height" Width="800" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner">
+        Title="Settings" Height="519" Width="800" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner">
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5 0 5 5">
-            <Button Width="75" Content="OK" Margin="0 0 5 0" IsDefault="True" Command="{Binding Path=UpdateCommand}" />
-            <Button Width="75" Content="CANCEL" Command="{Binding Path=CancelCommand}" />
+            <Button Width="75" Content="OK" Margin="0 0 5 0" IsDefault="True" Command="{Binding UpdateCommand}" />
+            <Button Width="75" Content="CANCEL" Command="{Binding CancelCommand}" />
         </StackPanel>
-        <StackPanel Margin="5">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <GroupBox Margin="0 0 5 0" Grid.Row="0" Grid.Column="0" Header="System">
+        <TabControl>
+            <TabItem>
+                <TabItem.Header>Settings</TabItem.Header>
+                <StackPanel Margin="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <CheckBox Grid.Row="0" Grid.Column="0" Margin="0 0 0 5" Content="Start Vault with Windows" IsChecked="{Binding Settings.System.StartWithWindows}" />
-                        <CheckBox Grid.Row="0" Grid.Column="1" Margin="0 0 0 5" Content="Always on top" IsChecked="{Binding Settings.System.AlwaysOnTop}" />
-                        <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0 0 0 5" Content="Show Vault in notification area" IsChecked="{Binding Settings.System.ShowVaultInNotifications}" />
-                        <CheckBox Grid.Row="2" Grid.Column="0" Margin="0 0 0 0" Content="Minimize to notification area" IsChecked="{Binding Settings.System.MinimizeToNotifications}" IsEnabled="{Binding Settings.System.ShowVaultInNotifications}" />
-                        <CheckBox Grid.Row="2" Grid.Column="1" Margin="0 0 0 0" Content="Close to notification area" IsChecked="{Binding Settings.System.CloseToNotifications}" IsEnabled="{Binding Settings.System.ShowVaultInNotifications}" />
-                    </Grid>
-                </GroupBox>
-                <GroupBox Grid.Row="0" Grid.Column="1" Header="Clipboard">
-                    <StackPanel>
-                        <ComboBox ItemsSource="{Binding Path=Settings.Clipboard.Copy, Converter={util:EnumToCollectionConverter}, Mode=OneTime}" 
+                        <GroupBox Margin="0 0 5 0" Grid.Row="0" Grid.Column="0" Header="System">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <CheckBox Grid.Row="0" Grid.Column="0" Margin="0 0 0 5" Content="Start Vault with Windows" IsChecked="{Binding Settings.System.StartWithWindows}" />
+                                <CheckBox Grid.Row="0" Grid.Column="1" Margin="0 0 0 5" Content="Always on top" IsChecked="{Binding Settings.System.AlwaysOnTop}" />
+                                <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0 0 0 5" Content="Show Vault in notification area" IsChecked="{Binding Settings.System.ShowVaultInNotifications}" />
+                                <CheckBox Grid.Row="2" Grid.Column="0" Margin="0 0 0 0" Content="Minimize to notification area" IsChecked="{Binding Settings.System.MinimizeToNotifications}" IsEnabled="{Binding Settings.System.ShowVaultInNotifications}" />
+                                <CheckBox Grid.Row="2" Grid.Column="1" Margin="0 0 0 0" Content="Close to notification area" IsChecked="{Binding Settings.System.CloseToNotifications}" IsEnabled="{Binding Settings.System.ShowVaultInNotifications}" />
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Grid.Row="0" Grid.Column="1" Header="Clipboard">
+                            <StackPanel>
+                                <ComboBox ItemsSource="{Binding Settings.Clipboard.Copy, Converter={util:EnumToCollectionConverter}, Mode=OneTime}" 
                                               SelectedValuePath="Value" DisplayMemberPath="Description" SelectedValue="{Binding Settings.Clipboard.Copy}" />
-                        <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
-                            <CheckBox Content="Auto clear after" IsChecked="{Binding Settings.Clipboard.AutoClear}" />
-                            <mah:NumericUpDown Margin="5 0 0 0" Minimum="5" Maximum="300" Width="75" Value="{Binding Settings.Clipboard.AutoClearDuration}" IsEnabled="{Binding Settings.Clipboard.AutoClear}" HorizontalContentAlignment="Right" SwitchUpDownButtons="True" />
-                            <Label Content="seconds" />
-                        </StackPanel>
-                    </StackPanel>
-                </GroupBox>
-            </Grid>
-            <GroupBox Margin="0 5 0 0" Header="Password Generator">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
-                        <Label Content="Password length: " Margin="-5 0 0 0" />
-                        <mah:NumericUpDown Margin="5 0 0 0" Minimum="6" Maximum="128" Width="75" Value="{Binding Settings.PasswordGenerator.Length}" HorizontalContentAlignment="Right" SwitchUpDownButtons="True" />
-                        <Label Content="characters" />
-                    </StackPanel>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="1.1*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <CheckBox Grid.Row="0" Grid.Column="0" Margin="0 0 0 5" Content="Include uppercase" IsChecked="{Binding Settings.PasswordGenerator.IncludeUppercase}" />
-                        <CheckBox Grid.Row="0" Grid.Column="1" Margin="0 0 0 5" Content="Include lowercase" IsChecked="{Binding Settings.PasswordGenerator.IncludeLowercase}" />
-                        <CheckBox Grid.Row="0" Grid.Column="2" Margin="0 0 0 5" Content="Include numerals" IsChecked="{Binding Settings.PasswordGenerator.IncludeNumerals}" />
-                        <CheckBox Grid.Row="0" Grid.Column="3" Margin="0 0 0 5" Content="Include space" IsChecked="{Binding Settings.PasswordGenerator.IncludeSpace}" />
-                        <CheckBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Margin="0 0 0 5" Content="Include special characters" IsChecked="{Binding Settings.PasswordGenerator.IncludeSpecial}" />
-                        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Orientation="Horizontal" Margin="0 0 0 0">
-                            <Label Content="Exclude characters :" Margin="-5 0 0 0"/>
-                            <TextBox Width="400" Margin="5 0 0 0" Text="{Binding Settings.PasswordGenerator.ExcludeCharacters}" />
-                        </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                                    <CheckBox Content="Auto clear after" IsChecked="{Binding Settings.Clipboard.AutoClear}" />
+                                    <mah:NumericUpDown Margin="5 0 0 0" Minimum="5" Maximum="300" Width="75" Value="{Binding Settings.Clipboard.AutoClearDuration}" IsEnabled="{Binding Settings.Clipboard.AutoClear}" HorizontalContentAlignment="Right" SwitchUpDownButtons="True" />
+                                    <Label Content="seconds" />
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
                     </Grid>
+                    <GroupBox Margin="0 5 0 0" Header="Password Generator">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                                <Label Content="Password length: " Margin="-5 0 0 0" />
+                                <mah:NumericUpDown Margin="5 0 0 0" Minimum="6" Maximum="128" Width="75" Value="{Binding Settings.PasswordGenerator.Length}" HorizontalContentAlignment="Right" SwitchUpDownButtons="True" />
+                                <Label Content="characters" />
+                            </StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="1.1*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <CheckBox Grid.Row="0" Grid.Column="0" Margin="0 0 0 5" Content="Include uppercase" IsChecked="{Binding Settings.PasswordGenerator.IncludeUppercase}" />
+                                <CheckBox Grid.Row="0" Grid.Column="1" Margin="0 0 0 5" Content="Include lowercase" IsChecked="{Binding Settings.PasswordGenerator.IncludeLowercase}" />
+                                <CheckBox Grid.Row="0" Grid.Column="2" Margin="0 0 0 5" Content="Include numerals" IsChecked="{Binding Settings.PasswordGenerator.IncludeNumerals}" />
+                                <CheckBox Grid.Row="0" Grid.Column="3" Margin="0 0 0 5" Content="Include space" IsChecked="{Binding Settings.PasswordGenerator.IncludeSpace}" />
+                                <CheckBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Margin="0 0 0 5" Content="Include special characters" IsChecked="{Binding Settings.PasswordGenerator.IncludeSpecial}" />
+                                <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Orientation="Horizontal" Margin="0 0 0 0">
+                                    <Label Content="Exclude characters :" Margin="-5 0 0 0"/>
+                                    <TextBox Width="400" Margin="5 0 0 0" Text="{Binding Settings.PasswordGenerator.ExcludeCharacters}" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Margin="0 5 0 0" Header="Git">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0 0 0 5" Content="Use git" IsChecked="{Binding Settings.Git.UseGit}" />
+                            <CheckBox Grid.Row="1" Grid.Column="0" Content="Automatically add .gpg-id files" IsChecked="{Binding Settings.Git.AutoAddGpgIdFiles}" IsEnabled="{Binding Settings.Git.UseGit}" />
+                            <CheckBox Grid.Row="1" Grid.Column="1" Content="Automatically push" IsChecked="{Binding Settings.Git.AutoPush}" IsEnabled="{Binding Settings.Git.UseGit}" />
+                            <CheckBox Grid.Row="1" Grid.Column="2" Content="Automatically pull" IsChecked="{Binding Settings.Git.AutoPull}" IsEnabled="{Binding Settings.Git.UseGit}" />
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Margin="0 5 0 0" Header="Program Paths">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".75*" />
+                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width=".25*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Content="GnuPG (gpg.exe):" Margin="-5 0 0 5" />
+                            <TextBox Grid.Row="0" Grid.Column="1" Margin="0 0 0 5" Text="{Binding Settings.Programs.Gpg, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
+                            <Button Grid.Row="0" Grid.Column="2" Margin="2 0 0 5" Content="..." Command="{Binding BrowseCommand}" CommandParameter="GPG" ToolTip="Browse program executable file location" />
+                            <Label Grid.Row="1" Grid.Column="0" Content="Git (git.exe):" Margin="-5 0 0 0" />
+                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Settings.Programs.Git, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
+                            <Button Grid.Row="1" Grid.Column="2" Margin="2 0 0 0" Content="..." Command="{Binding BrowseCommand}" CommandParameter="GIT" ToolTip="Browse program executable file location" />
+                        </Grid>
+                    </GroupBox>
                 </StackPanel>
-            </GroupBox>
-            <GroupBox Margin="0 5 0 0" Header="Git">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
+            </TabItem>
+            <TabItem Header="Profiles">
+                <Grid Margin="5">
                     <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0 0 0 5" Content="Use git" IsChecked="{Binding Settings.Git.UseGit}" />
-                    <CheckBox Grid.Row="1" Grid.Column="0" Content="Automatically add .gpg-id files" IsChecked="{Binding Settings.Git.AutoAddGpgIdFiles}" IsEnabled="{Binding Settings.Git.UseGit}" />
-                    <CheckBox Grid.Row="1" Grid.Column="1" Content="Automatically push" IsChecked="{Binding Settings.Git.AutoPush}" IsEnabled="{Binding Settings.Git.UseGit}" />
-                    <CheckBox Grid.Row="1" Grid.Column="2" Content="Automatically pull" IsChecked="{Binding Settings.Git.AutoPull}" IsEnabled="{Binding Settings.Git.UseGit}" />
+                    <ListView Grid.Row="0" Margin="0 0 0 5" 
+                              ItemsSource="{Binding Settings.Profiles}" SelectedItem="{Binding SelectedProfile}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem" BasedOn="{StaticResource MahApps.Styles.ListViewItem}">
+                                <Setter Property="IsSelected" Value="{Binding IsSelected}" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name" Width="200" DisplayMemberBinding="{Binding Name}" />
+                                <GridViewColumn Header="Location" Width="400" DisplayMemberBinding="{Binding Location}" />
+                                <GridViewColumn Header="Default" Width="75">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Visibility="{Binding IsDefault, Converter={util:BoolToVisibilityConverter}}">
+                                                <ip:PackIconMaterial Kind="Heart" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <Button Content="{ip:Material Kind=FolderPlusOutline}" Width="30" Height="30" ToolTip="Add new profile" Command="{Binding NewProfileCommand}" />
+                        <Button Content="{ip:Material Kind=FolderEditOutline}" Margin="5 0 0 0" ToolTip="Edit selected profile" Command="{Binding EditProfileCommand}" />
+                        <Button Content="{ip:Material Kind=FolderRemoveOutline}" Margin="5 0 0 0" ToolTip="Delete selected profile(s)" Command="{Binding DeleteProfileCommand}" />
+                        <Button Content="{ip:Material Kind=FolderHeartOutline}" Margin="5 0 0 0" ToolTip="Mark selected profile as default" Command="{Binding DefaultProfileCommand}" />
+                    </StackPanel>
                 </Grid>
-            </GroupBox>
-            <GroupBox Margin="0 5 0 0" Header="Program Paths">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".75*" />
-                        <ColumnDefinition Width="4*" />
-                        <ColumnDefinition Width=".25*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Content="GnuPG (gpg.exe):" Margin="-5 0 0 5" />
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="0 0 0 5" Text="{Binding Settings.Programs.Gpg}" />
-                    <Button Grid.Row="0" Grid.Column="2" Margin="2 0 0 5" Content="..." Command="{Binding Path=BrowseCommand}" CommandParameter="GPG" />
-                    <Label Grid.Row="1" Grid.Column="0" Content="Git (git.exe):" Margin="-5 0 0 0" />
-                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Settings.Programs.Git}" />
-                    <Button Grid.Row="1" Grid.Column="2" Margin="2 0 0 0" Content="..." Command="{Binding Path=BrowseCommand}" CommandParameter="GIT" />
-                </Grid>
-            </GroupBox>
-        </StackPanel>
+            </TabItem>
+        </TabControl>
     </DockPanel>
 </mah:MetroWindow>

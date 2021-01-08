@@ -11,7 +11,9 @@ namespace Seemon.Vault.Views
         public Main()
         {
             InitializeComponent();
-            this.DataContext = new MainViewModel(this);
+            DataContext = new MainViewModel(this);
         }
+
+        private void OnWindowLoaded(object sender, System.Windows.RoutedEventArgs e) => flyoutAbout.Content = new About();
     }
 }

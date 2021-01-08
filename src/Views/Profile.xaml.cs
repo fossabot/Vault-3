@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.Controls;
+using Seemon.Vault.Helpers;
 using Seemon.Vault.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,14 +18,14 @@ using System.Windows.Shapes;
 namespace Seemon.Vault.Views
 {
     /// <summary>
-    /// Interaction logic for Settings.xaml
+    /// Interaction logic for Profile.xaml
     /// </summary>
-    public partial class Settings : MetroWindow
+    public partial class Profile : MetroWindow
     {
-        public Settings()
+        public Profile(Models.Profile profile = null)
         {
             InitializeComponent();
-            DataContext = new SettingsViewModel(this);
+            this.DataContext = new ProfileViewModel(this, profile);
         }
     }
 }

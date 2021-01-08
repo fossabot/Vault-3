@@ -6,6 +6,11 @@ namespace Seemon.Vault.Models
     public class SystemSettings : BindableBase
     {
         private bool _startWithWindows = false;
+        private bool _alwaysOnTop = false;
+        private bool _showVaultInNotifications = false;
+        private bool _minimizeToNotifications = false;
+        private bool _closeToNotifications = false;
+
         [JsonProperty("startWithWindows")]
         public bool StartWithWindows
         {
@@ -13,7 +18,6 @@ namespace Seemon.Vault.Models
             set { SetProperty(ref _startWithWindows, value); }
         }
 
-        private bool _alwaysOnTop = false;
         [JsonProperty("alwaysOnTop")]
         public bool AlwaysOnTop
         {
@@ -21,7 +25,6 @@ namespace Seemon.Vault.Models
             set { SetProperty(ref _alwaysOnTop, value); }
         }
 
-        private bool _showVaultInNotifications = false;
         [JsonProperty("showVaultInNotifications")]
         public bool ShowVaultInNotifications
         {
@@ -29,7 +32,6 @@ namespace Seemon.Vault.Models
             set { SetProperty(ref _showVaultInNotifications, value); }
         }
 
-        private bool _minimizeToNotifications = false;
         [JsonProperty("minimizeToNotifications")]
         public bool MinimizeToNotifications
         {
@@ -37,7 +39,6 @@ namespace Seemon.Vault.Models
             set { SetProperty(ref _minimizeToNotifications, value); }
         }
 
-        private bool _closeToNotifications = false;
         [JsonProperty("closeToNotifications")]
         public bool CloseToNotifications
         {
