@@ -14,8 +14,8 @@ namespace Seemon.Vault.Helpers
             if (attributes.Any())
                 return (attributes.First() as DescriptionAttribute).Description;
 
-            TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
-            return ti.ToTitleCase(ti.ToLower(value.ToString()));
+            var textInfo = CultureInfo.CurrentCulture.TextInfo;
+            return textInfo.ToTitleCase(textInfo.ToLower(value.ToString()));
         }
 
         public static IEnumerable<ValueDescription> GetAllValuesAndDescriptions(Type t)

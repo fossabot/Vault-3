@@ -6,14 +6,17 @@ namespace Seemon.Vault.Models
     public class GitSettings : BindableBase
     {
         private bool _useGit = false;
-        [JsonProperty("_useGit")]
+        private bool _autoAddGpgIdFiles = false;
+        private bool _autoPush = false;
+        private bool _autoPull = false;
+
+        [JsonProperty("useGit")]
         public bool UseGit
         {
             get { return _useGit; }
             set { SetProperty(ref _useGit, value); }
         }
 
-        private bool _autoAddGpgIdFiles = false;
         [JsonProperty("autoAddGpgIdFiles")]
         public bool AutoAddGpgIdFiles
         {
@@ -21,7 +24,6 @@ namespace Seemon.Vault.Models
             set { SetProperty(ref _autoAddGpgIdFiles, value); }
         }
 
-        private bool _autoPush = false;
         [JsonProperty("autoPush")]
         public bool AutoPush
         {
@@ -29,7 +31,6 @@ namespace Seemon.Vault.Models
             set { SetProperty(ref _autoPush, value); }
         }
 
-        private bool _autoPull = false;
         [JsonProperty("autoPull")]
         public bool AutoPull
         {

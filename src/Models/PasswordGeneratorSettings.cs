@@ -6,6 +6,13 @@ namespace Seemon.Vault.Models
     public class PasswordGeneratorSettings : BindableBase
     {
         private int _length = 8;
+        private bool _includeUppercase = true;
+        private bool _includeLowercase = true;
+        private bool _includeNumerals = true;
+        private bool _includeSpace = false;
+        private bool _includeSpecial = true;
+        private string _excludeCharacters = string.Empty;
+
         [JsonProperty("length")]
         public int Length
         {
@@ -13,7 +20,6 @@ namespace Seemon.Vault.Models
             set { SetProperty(ref _length, value); }
         }
 
-        private bool _includeUppercase = true;
         [JsonProperty("includeUppercase")]
         public bool IncludeUppercase
         {
@@ -21,7 +27,6 @@ namespace Seemon.Vault.Models
             set { SetProperty(ref _includeUppercase, value); }
         }
 
-        private bool _includeLowercase = true;
         [JsonProperty("includeLowercase")]
         public bool IncludeLowercase
         {
@@ -29,7 +34,6 @@ namespace Seemon.Vault.Models
             set { SetProperty(ref _includeLowercase, value); }
         }
 
-        private bool _includeNumerals = true;
         [JsonProperty("includeNumerals")]
         public bool IncludeNumerals
         {
@@ -37,7 +41,6 @@ namespace Seemon.Vault.Models
             set { SetProperty(ref _includeNumerals, value); }
         }
 
-        private bool _includeSpace = false;
         [JsonProperty("includeSpace")]
         public bool IncludeSpace
         {
@@ -45,7 +48,6 @@ namespace Seemon.Vault.Models
             set { SetProperty(ref _includeSpace, value); }
         }
 
-        private bool _includeSpecial = true;
         [JsonProperty("includeSpecial")]
         public bool IncludeSpecial
         {
@@ -53,7 +55,6 @@ namespace Seemon.Vault.Models
             set { SetProperty(ref _includeSpecial, value); }
         }
 
-        private string _excludeCharacters = string.Empty;
         [JsonProperty("excludeCharacters")]
         public string ExcludeCharacters
         {

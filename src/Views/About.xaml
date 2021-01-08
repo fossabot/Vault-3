@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Seemon.Vault.Helpers"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="OnControlLoaded">
     <UserControl.Resources>
         <local:CaseConverter Case="Upper" x:Key="CaseConverter" />
     </UserControl.Resources>
@@ -32,7 +32,7 @@
                     <Hyperlink Command="{Binding NavigateCommand}" CommandParameter="https://github.com/mattseemon/Vault">Source Code</Hyperlink>
                 </TextBlock>
                 <TextBlock Grid.Column="1" FontFamily="Segoe UI" FontSize="14" FontWeight="Light" HorizontalAlignment="Center" >
-                    <Hyperlink Command="{Binding NavigateCommand}" CommandParameter="https://github.com/mattseemon/Vault/blob/main/LICENSE">License</Hyperlink>
+                    <Hyperlink Command="{Binding LicenseCommand}" CommandParameter="https://github.com/mattseemon/Vault/blob/main/LICENSE">License</Hyperlink>
                 </TextBlock>
                 <TextBlock Grid.Column="2" FontFamily="Segoe UI" FontSize="14" FontWeight="Light" HorizontalAlignment="Right" >
                     <Hyperlink Command="{Binding NavigateCommand}" CommandParameter="https://github.com/mattseemon/Vault/blob/main/README.md">Credits</Hyperlink>

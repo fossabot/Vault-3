@@ -1,17 +1,10 @@
-﻿using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Resources;
-using System;
+﻿using System;
+using System.Reflection;
 
 namespace Seemon.Vault.Models
 {
     public class About
     {
-        public string Title { get; set; }
-        public string Version { get; set; }
-        public string Author { get; set; }
-        public string Description { get; set; }
-        public string Copyright { get; set; }
         public About()
             : this(Assembly.GetExecutingAssembly())
         { }
@@ -24,6 +17,16 @@ namespace Seemon.Vault.Models
             Description = GetAssemblyAttribute<AssemblyDescriptionAttribute>(assembly)?.Description ?? "A GnuPG powered, file system based secrets repository.";
             Copyright = GetAssemblyAttribute<AssemblyCopyrightAttribute>(assembly)?.Copyright ?? "© Copyright 2020, Matt Seemon. All rights reserved.";
         }
+
+        public string Title { get; set; }
+
+        public string Version { get; set; }
+
+        public string Author { get; set; }
+
+        public string Description { get; set; }
+
+        public string Copyright { get; set; }
 
         public static T GetAssemblyAttribute<T>(Assembly assembly)
             where T : Attribute

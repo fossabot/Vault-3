@@ -1,19 +1,22 @@
 ﻿using Seemon.Vault.Helpers;
 using Seemon.Vault.Models;
 using System.Diagnostics;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Seemon.Vault.ViewModels
 {
-    public class AboutViewModel : BindableBase
+    public class AboutViewModel : ViewModelBase
     {
+        private RelayCommand _navigateCommand;
+        private RelayCommand _licenseCommand;
+        private About _about;
 
-        public AboutViewModel()
+        public AboutViewModel(Window owner)
+            : base(owner)
         {
             _about = new About();
         }
-
-        private About _about;
 
         public string Title
         {
@@ -40,14 +43,23 @@ namespace Seemon.Vault.ViewModels
             get { return _about.Copyright; }
         }
 
-        private RelayCommand _navigateCommand;
         public ICommand NavigateCommand
         {
             get
             {
                 if (_navigateCommand == null)
-                    _navigateCommand = new RelayCommand(OnNavigate);
+                    _navigateCommand = RegisterCommand(OnNavigate);
                 return _navigateCommand;
+            }
+        }
+
+        public ICommand LicenseCommand
+        {
+            get
+            {
+                if (_licenseCommand == null)
+                    _licenseCommand = RegisterCommand(OnLicense);
+                return _licenseCommand;
             }
         }
 
@@ -55,6 +67,13 @@ namespace Seemon.Vault.ViewModels
         {
             if (parameter.IsNotNull())
                 Process.Start(new ProcessStartInfo { FileName = parameter.ToString(), UseShellExecute = true });
+        }
+
+        public void OnLicense(object parameter)
+        {
+            var licenseWindow = new Views.License();
+            licenseWindow.Owner = Owner;
+            licenseWindow.ShowDialog();
         }
     }
 }
