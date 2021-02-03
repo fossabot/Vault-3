@@ -2,10 +2,12 @@
 using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Markup;
 
-namespace Seemon.Vault.Helpers
+namespace Seemon.Vault.Helpers.Converters
 {
-    public class CaseConverter : IValueConverter
+    [ValueConversion(typeof(string), typeof(string))]
+    public class CaseConverter : MarkupExtension, IValueConverter
     {
         public CharacterCasing Case { get; set; }
 
@@ -31,5 +33,7 @@ namespace Seemon.Vault.Helpers
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
+
+        public override object ProvideValue(IServiceProvider serviceProvider) => this;
     }
 }

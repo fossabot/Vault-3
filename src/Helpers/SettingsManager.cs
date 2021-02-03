@@ -7,8 +7,8 @@ namespace Seemon.Vault.Helpers
 {
     public sealed class SettingsManager
     {
-        public static SettingsManager _instance = null;
-        public static readonly object _padlock = new object();
+        private static SettingsManager _instance = null;
+        private static readonly object _padlock = new object();
 
         private string _path = string.Empty;
         private Settings _settings;
@@ -46,6 +46,11 @@ namespace Seemon.Vault.Helpers
         {
             var settingsJson = File.ReadAllText(_path);
             _settings = JsonConvert.DeserializeObject<Settings>(settingsJson);
+        }
+
+        public void SaveSettings(bool reload = true)
+        {
+            SaveSettings(this._settings, reload);
         }
 
         public void SaveSettings(Settings settings, bool reload = true)

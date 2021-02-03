@@ -4,8 +4,9 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Seemon.Vault.Helpers
+namespace Seemon.Vault.Helpers.Converters
 {
+    [ValueConversion(typeof(bool), typeof(Visibility))]
     class BoolToVisibilityConverter : MarkupExtension, IValueConverter
     {
         private object GetVisibility(object value)

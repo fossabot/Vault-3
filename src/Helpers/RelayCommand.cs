@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace Seemon.Vault.Helpers
 {
-    public class RelayCommand : ICommand
+    public class RelayCommand : IRelayCommand
     {
         private readonly Action<object> _execute;
         private readonly Predicate<object> _canExecute;
@@ -28,10 +28,6 @@ namespace Seemon.Vault.Helpers
 
         public void Execute(object parameter) => _execute(parameter);
 
-        public void RaiseCanExecuteChanged()
-        {
-            if (CanExecuteChanged != null)
-                CanExecuteChanged(this, EventArgs.Empty);
-        }
+        public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
     }
 }

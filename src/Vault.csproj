@@ -17,10 +17,19 @@
     <Copyright>© Copyright 2020, Matt Seemon. All rights reserved.</Copyright>
     <RepositoryUrl>https://github.com/mattseemon/Vault</RepositoryUrl>
     <UseWindowsForms>true</UseWindowsForms>
+    <PackageIcon>Vault-512.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Upgrade.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Vault.ico" />
+    <None Include="..\assets\Vault-512.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +37,7 @@
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.8.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="RestSharp" Version="106.11.7" />
   </ItemGroup>
 
   <ItemGroup>
@@ -65,5 +75,4 @@
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="&quot;$(DevEnvDir)TextTransform.exe&quot; -a !!BuildConfiguration!$(Configuration) &quot;$(ProjectDir)\AssemblyInfo.tt&quot;" />
   </Target>
-
 </Project>

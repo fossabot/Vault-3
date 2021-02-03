@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace Seemon.Vault.Helpers
 {
@@ -23,9 +24,18 @@ namespace Seemon.Vault.Helpers
             return col;
         }
 
-        public static bool IsNotNull<T>(this T self)
+        public static bool IsNotNull<T>(this T self) => (self != null);
+
+        public static async void FireAndForgetSafeAsync(this Task task)
         {
-            return (self != null);
+            try
+            {
+                await task;
+            }
+            catch
+            {
+                // Add error handler
+            }
         }
     }
 }

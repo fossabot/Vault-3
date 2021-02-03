@@ -43,7 +43,7 @@ namespace Seemon.Vault.ViewModels
 
         public void OnShowSettings(object parameter)
         {
-            var settingsWindow = new Views.Settings();
+            var settingsWindow = new Views.SettingsView();
             settingsWindow.Owner = Owner;
             settingsWindow.ShowDialog();
         }

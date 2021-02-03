@@ -1,0 +1,20 @@
+﻿<mah:MetroWindow x:Class="Seemon.Vault.Views.LicenseView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 xmlns:util="clr-namespace:Seemon.Vault.Helpers.Converters"
+        xmlns:local="clr-namespace:Seemon.Vault.Views"
+        mc:Ignorable="d"
+        Title="License" SizeToContent="Height" Width="550" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ResizeMode="NoResize" FontFamily="Consolas">
+    <DockPanel LastChildFill="True">
+        <TextBlock DockPanel.Dock="Top" Margin="5" TextWrapping="Wrap" Padding="5">
+            <Hyperlink NavigateUri="https://github.com/mattseemon/Vault">Vault</Hyperlink> is an open source project published under the MIT License. You can view the source code and contribute to this project on <Hyperlink NavigateUri="https://github.com/mattseemon/Vault">GitHub</Hyperlink>.
+        </TextBlock>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="CLOSE" Margin="5" IsCancel="True" IsDefault="True" />
+        </StackPanel>
+        <TextBlock Text="{Binding Lines, Converter={util:ListToStringConverter}}" Margin="5 0 5 5" TextWrapping="WrapWithOverflow" Padding="5" TextAlignment="Justify"></TextBlock>
+    </DockPanel>
+</mah:MetroWindow>

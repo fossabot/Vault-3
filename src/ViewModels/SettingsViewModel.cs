@@ -32,6 +32,7 @@ namespace Seemon.Vault.ViewModels
             _settings.Clipboard.PropertyChanged += OnPropertyChanged;
             _settings.PasswordGenerator.PropertyChanged += OnPropertyChanged;
             _settings.Git.PropertyChanged += OnPropertyChanged;
+            _settings.Updates.PropertyChanged += OnPropertyChanged;
             _settings.Programs.PropertyChanged += OnPropertyChanged;
             _settings.Profiles.CollectionChanged += OnCollectionChanged;
         }
@@ -231,7 +232,7 @@ namespace Seemon.Vault.ViewModels
 
         private void ShowProfileDialog(Profile selectedProfile = null)
         {
-            var profileWindow = new Views.Profile(selectedProfile);
+            var profileWindow = new Views.ProfileView(selectedProfile);
             profileWindow.Owner = Owner;
             profileWindow.ShowDialog();
         }

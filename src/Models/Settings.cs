@@ -13,6 +13,7 @@ namespace Seemon.Vault.Models
             Clipboard = new ClipboardSettings();
             PasswordGenerator = new PasswordGeneratorSettings();
             Git = new GitSettings();
+            Updates = new UpdateSettings();
             Programs = new ProgramPathSettings();
             Profiles = new ItemObservableCollection<Profile>();
         }
@@ -31,6 +32,9 @@ namespace Seemon.Vault.Models
 
         [JsonProperty("git")]
         public GitSettings Git { get; set; }
+
+        [JsonProperty("updates")]
+        public UpdateSettings Updates { get; set; }
 
         [JsonProperty("programs")]
         public ProgramPathSettings Programs { get; set; }

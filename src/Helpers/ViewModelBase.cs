@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -58,9 +60,16 @@ namespace Seemon.Vault.Helpers
             return command;
         }
 
+        public AsyncRelayCommand RegisterCommand(Func<Task> execute, Func<bool> canExecute = null)
+        {
+            var command = new AsyncRelayCommand(execute, canExecute);
+            _commands.Add(command);
+            return command;
+        }
+
         public void RaiseCommandsCanExecute()
         {
-            foreach (RelayCommand command in _commands)
+            foreach (IRelayCommand command in _commands)
             {
                 command.RaiseCanExecuteChanged();
             }

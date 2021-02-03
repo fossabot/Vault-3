@@ -6,14 +6,14 @@ namespace Seemon.Vault.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class Main : MetroWindow
+    public partial class MainView : MetroWindow
     {
-        public Main()
+        public MainView()
         {
             InitializeComponent();
             DataContext = new MainViewModel(this);
         }
 
-        private void OnWindowLoaded(object sender, System.Windows.RoutedEventArgs e) => flyoutAbout.Content = new About();
+        private void OnWindowLoaded(object sender, System.Windows.RoutedEventArgs e) => flyoutAbout.Content = new AboutView();
     }
 }

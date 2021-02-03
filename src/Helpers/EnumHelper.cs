@@ -6,6 +6,12 @@ using System.Linq;
 
 namespace Seemon.Vault.Helpers
 {
+    public class ValueDescription
+    {
+        public object Value { get; set; }
+        public object Description { get; set; }
+    }
+
     public static class EnumHelper
     {
         public static string Description(this Enum value)
